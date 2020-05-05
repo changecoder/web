@@ -1,0 +1,5 @@
+{
+  "name": "@changecoder/global",
+  "version": "0.0.1",
+  "main": "libs/index.js"
+}

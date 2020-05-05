@@ -1,0 +1,88 @@
+html {
+    font-size: 14px;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit; 
+}
+
+body, div, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    background-color: #f5f8fa;
+    width: 100%;
+    color: #212529;
+    letter-spacing: 0; 
+    padding-top: 49px;
+}
+
+a {
+    color: #3097D1;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #216a94;
+}
+
+.nav {
+    list-style: none;
+}
+
+.navbar {
+    list-style: none;
+    display: flex;
+}
+
+.navbar.nav a{
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+.navbar.nav>.active a {
+    color: white;
+}
+
+.pager {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word; 
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+.collapse {
+    display: none;
+}
+
+.btn {
+    border: 0;
+    outline: none;
+    border-radius: 15px;
+    width: 100%;
+    padding: 1.0rem;
+    background-color: #3097D1;
+}

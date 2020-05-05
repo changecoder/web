@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{ #each metas }}  
+    <meta name="{{ name }}" content="{{ content }}"> 
+  {{ /each }} 
+  <link rel="stylesheet" href="styles/commom.css" type="text/css" />
+  {{ #each links }}
+    <link rel="stylesheet" href="styles/{{ this }}.css" type="text/css" />
+  {{ /each }}
+  <title>{{ title }}</title>
+</head>
+<body>
+  <div id='root-header'>{{ header }}</div>
+  <div id='root-content'>{{ content }}</div>
+  <div id='root-footer'>{{ footer }}</div>
+  <script src="scripts/react.min.js" />
+  <script src="scripts/react-dom.min.js" />
+  {{ #each scripts }}  
+    <script src="scripts/{{ this }}.min.js" /> 
+  {{ /each }} 
+</body>
+</html>
