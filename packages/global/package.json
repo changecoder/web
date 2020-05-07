@@ -1,5 +1,13 @@
 {
   "name": "@changecoder/global",
   "version": "0.0.1",
-  "main": "libs/index.js"
+  "scripts": {
+    "build": "node node_modules/@changecoder/devtools/scripts/babel.js"
+  },
+  "main": "libs/src/index.js",
+  "dependencies": {
+    "@changecoder/devtools": "file:../devtools",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
 }

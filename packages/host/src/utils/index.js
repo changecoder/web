@@ -1,4 +1,4 @@
-import { refTypes } from '../constants/type';
+const { refTypes } = require('../constants/type')
 
 const deepCopy = (source) => {
     let result;

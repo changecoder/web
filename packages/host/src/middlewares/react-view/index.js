@@ -3,45 +3,39 @@ const { resolve } = require('path');
 const Handlebars = require('handlebars')
 
 const { renderToString, renderToStaticMarkup } = require('react-dom/server');
-const { Header, Footer } = require('@changecoder/global');
+const Gloabl = require('@changecoder/global');
+const { Header, Footer } = Gloabl.default || Gloabl
 const { createElement } = require('react');
 const { deepCopy } = require('../../utils');
 
-export default class ReactView {
+class ReactView {
     constructor() {
         this.render = this.render.bind(this);
         this.register = this.register.bind(this);
-        this.renderWidget = this.renderWidget.bind(this);
-        this.createHtml = this.createHtml.bind(this);
+        this.renderModule = this.renderModule.bind(this);
         this.renderHtml = this.renderHtml.bind(this);
         this.addStyle = this.addStyle.bind(this);
         this.addScript = this.addScript.bind(this);
         this.addWidgetBundle = this.addWidgetBundle.bind(this);
-        this.renderLayout = this.renderLayout.bind(this);
         this.init = this.init.bind(this);
+        this.init()
     }
 
     init() {
-        this.links = [];
-        this.scripts = [];
-        this.metas = [];
+        const view = this;
         fs.readFile(resolve(__dirname, 'index.html'), {encoding:'utf-8'}, function (err,data) {
-            this.htmlString = data
+            view.htmlString = data
         });
-        this.renderLayout();
-    }
-
-    renderLayout() {
-        this.renderModule(Header).then(result => this.header = result)
-        this.renderModule(Footer).then(result => this.footer = result)
     }
 
     render() {
         const view = this;
-        return async function({title, widget, params}) {
+        return async function({title, module = {}}) {
             view.title = title;
             try {
-                this.content = await view.renderModule(widget, this, params);
+                view.header = await view.renderModule(Header);
+                view.footer = await view.renderModule(Footer);
+                view.content = await view.renderModule(module);
                 this.body = view.renderHtml();
             } catch(error) {
                 this.body = JSON.stringify(error);
@@ -97,12 +91,14 @@ export default class ReactView {
     }
 
     addStyle(name) {
+        this.links = this.links || []
         if (!this.links.includes(name)) {
             this.links.push(name)
         }
     }
 
     addScript(name) {
+        this.scripts = this.scripts || []
         if (!this.scripts.includes(name)) {
             this.scripts.push(name)
         }
@@ -110,12 +106,14 @@ export default class ReactView {
 
     renderHtml() {
         const template = Handlebars.compile(this.htmlString)
-        const { title = 'ChangeCoder', links = [], scripts = [], metas = [] } = this
+        const { title = 'ChangeCoder', header, content, footer, scripts, links } = this
         return template({
             title, 
-            links, 
-            scripts, 
-            metas
+            header, 
+            footer,
+            content,
+            scripts,
+            links
         });
     }
 
@@ -128,3 +126,5 @@ export default class ReactView {
         return dispatch;
     }
 }
+
+module.exports = ReactView

@@ -2,7 +2,7 @@
   "name": "@changecoder/host",
   "version": "0.0.1",
   "dependencies": {
-    "@changecoder/global": "^0.0.1",
+    "@changecoder/global": "file:../global",
     "global": "^4.4.0",
     "handlebars": "^4.7.6",
     "koa": "^2.11.0",

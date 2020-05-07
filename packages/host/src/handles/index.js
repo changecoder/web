@@ -1,7 +1,8 @@
-const homeHandle = (ctx, next) => {
-  ctx.render({
+const homeHandle = async (ctx, next) => {
+  await ctx.render({
     title: 'ChangeCoder Home'
   })
+  return next();
 }
 
 module.exports = {

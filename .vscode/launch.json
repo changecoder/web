@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceRoot}/packages/host/server.js",
+      "sourceMaps": true,
+      "trace": true,
+      "outFiles": [
+        "${workspaceRoot}/packages/host/node_modules/@changecoder/**/*.js",
+      ]
+    }
+  ]
+}
