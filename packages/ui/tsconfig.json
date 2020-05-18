@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "ccui": ["components/index.tsx"],
+      "ccui/es/*": ["components/*"]
+    },
+    "target": "esnext",
+    "lib": [
+      "dom", 
+      "esnext"
+    ],
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules", "lib", "es"]
+}

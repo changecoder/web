@@ -1,0 +1,11 @@
+{
+  "name": "@changecoder/tools",
+  "version": "0.0.1",
+  "bin": {
+    "ccui-tools": "bin/ccui"
+  },
+  "dependencies": {
+    "colorful": "^2.1.0",
+    "commander": "^5.1.0"
+  }
+}
