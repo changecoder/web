@@ -1,4 +1,4 @@
-import React, { ForwardRefRenderFunction, forwardRef } from 'react'
+import React, { ForwardRefRenderFunction, forwardRef, useContext, createRef } from 'react'
 import classNames from 'classnames'
 import omit from 'omit.js'
 
@@ -44,29 +44,24 @@ export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>
 
 const InternalButton: ForwardRefRenderFunction<undefined, ButtonProps> = (props, ref) => {
 
-  const size = React.useContext(SizeContext)
+  const size = useContext(SizeContext)
 
-  const { getPrefixCls } = React.useContext(ConfigContext)
+  const { getPrefixCls } = useContext(ConfigContext)
 
-  const buttonRef = (ref as any) || React.createRef<HTMLElement>()
+  const buttonRef = (ref as any) || createRef<HTMLElement>()
 
   const { 
     prefixCls: customizePrefixCls,
     shape,
     size: customizeSize,
     className,
-    loading,
     type,
-    htmlType,
     children,
     ...rest
   } = props
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement, MouseEvent>) => {
     const { onClick } = props
-    if (loading) {
-      return
-    }
     if (onClick) {
       (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)(e)
     }
@@ -95,7 +90,7 @@ const InternalButton: ForwardRefRenderFunction<undefined, ButtonProps> = (props,
 
   const kids = children
 
-  const linkButtonRestProps = omit(rest as AnchorButtonProps, ['htmlType', 'loading'])
+  const linkButtonRestProps = omit(rest as NativeButtonProps, ['htmlType', 'loading'])
 
   if (linkButtonRestProps.href !== undefined) {
     return (
@@ -105,8 +100,11 @@ const InternalButton: ForwardRefRenderFunction<undefined, ButtonProps> = (props,
     )
   }
 
+  const { htmlType, ...otherProps } = rest as NativeButtonProps;
+
   const buttonNode = (
     <button
+      {...(omit(otherProps, ['loading']) as NativeButtonProps)}
       type={htmlType}
       className={classes}
       onClick={handleClick}

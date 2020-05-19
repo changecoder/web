@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const rimraf = require('rimraf');
 const merge2 = require('merge2');
 const argv = require('minimist')(process.argv.slice(2));
-const through2 = require('through2');
 
 const stripCode = require('gulp-strip-code');
 const ts = require('gulp-typescript');
@@ -128,41 +127,23 @@ function dist(done) {
 }
 
 function babelify(js, modules) {
-  const babelConfig = getBabelCommonConfig(modules);
-  delete babelConfig.cacheDirectory;
+  // const babelConfig = getBabelCommonConfig(modules);
+  // delete babelConfig.cacheDirectory;
 
-  if (modules === false) {
-    babelConfig.plugins.push(replaceLib);
-  }
+  // if (modules === false) {
+  //   babelConfig.plugins.push(replaceLib);
+  // }
 
-  let stream = js.pipe(babel(babelConfig)).pipe(
-    through2.obj(function (file, encoding, next) {
-      console.log(file)
-      this.push(file.clone());
-      if (file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
-        const content = file.contents.toString(encoding);
-        if (content.indexOf("'react-native'") !== -1) {
-          next();
-          return;
-        }
+  // let stream = js.pipe(babel(babelConfig));
 
-        file.contents = Buffer.from(cssInjection(content));
-        file.path = file.path.replace(/index\.js/, 'css.js');
-        this.push(file);
-        next();
-      } else {
-        next();
-      }
-    })
-  );
-
-  if (modules === false) {
-    stream = stream.pipe(
-      stripCode({
-        start_comment: '@remove-on-es-build-begin',
-        end_comment: '@remove-on-es-build-end',
-      })
-    );
-  }
-  return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
+  // if (modules === false) {
+  //   stream = stream.pipe(
+  //     stripCode({
+  //       start_comment: '@remove-on-es-build-begin',
+  //       end_comment: '@remove-on-es-build-end',
+  //     })
+  //   );
+  // }
+  // return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
+  return js.pipe(gulp.dest(modules === false ? esDir : libDir))
 }
