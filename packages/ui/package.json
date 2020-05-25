@@ -1,11 +1,9 @@
 {
-  "name": "@changecoder/ui",
+  "name": "@changecoder/ccui",
   "version": "0.0.1",
   "scripts": {
-    "build": "npm run compile && npm run dist",
-    "dist": "ccui-tools run dist",
-    "compile": "ccui-tools run compile",
-    "tsc": "tsc"
+    "build": "ccui-tools run build",
+    "site": "ccui-tools run site"
   },
   "homepage": "https://ui.changecoder.com/",
   "files": [

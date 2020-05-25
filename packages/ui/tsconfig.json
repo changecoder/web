@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "ccui": ["components/index.tsx"],
+      "ccui": ["components/index.ts"],
       "ccui/es/*": ["components/*"]
     },
     "target": "esnext",
@@ -10,12 +10,12 @@
       "dom", 
       "esnext"
     ],
-    "jsx": "preserve",
+    "jsx": "react",
     "moduleResolution": "node",
     "strictNullChecks": true,
     "skipLibCheck": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "lib", "es"]
+  "exclude": ["node_modules", "dom", "es"]
 }
